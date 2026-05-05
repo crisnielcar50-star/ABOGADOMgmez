@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Michel Gómez — Abogado</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a0a;
+    --paper: #f4f0e8;
+    --cream: #ebe5d6;
+    --gold: #b8923d;
+    --gold-soft: #d4a857;
+    --rust: #8b3a1f;
+    --shadow: rgba(10, 10, 10, 0.08);
+    --serif: 'Cormorant Garamond', serif;
+    --sans: 'Inter Tight', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.5;
+    overflow-x: hidden;
+    background-image:
+      radial-gradient(circle at 15% 20%, rgba(184, 146, 61, 0.04) 0%, transparent 40%),
+      radial-gradient(circle at 85% 70%, rgba(139, 58, 31, 0.03) 0%, transparent 50%);
+  }
+
+  /* Grain overlay */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.5;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0.04 0 0 0 0 0.04 0 0 0 0 0.04 0 0 0 0.18 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* === NAV === */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    padding: 1.75rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(8px);
+    background: rgba(244, 240, 232, 0.72);
+    border-bottom: 1px solid rgba(10, 10, 10, 0.06);
+  }
+
+  .nav-mark {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .nav-mark .ampersand {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-weight: 400;
+  }
+
+  .nav-links a {
+    color: var(--ink);
+    text-decoration: none;
+    position: relative;
+    transition: color 0.3s;
+  }
+
+  .nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0;
+    height: 1px;
+    background: var(--gold);
+    transition: width 0.4s ease;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+  .nav-links a:hover::after { width: 100%; }
+
+  .nav-phone {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--ink);
+    text-decoration: none;
+    padding: 0.55rem 1.1rem;
+    border: 1px solid var(--ink);
+    border-radius: 999px;
+    transition: all 0.3s;
+  }
+
+  .nav-phone:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  /* === HERO === */
+  .hero {
+    min-height: 100vh;
+    padding: 9rem 3rem 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    position: relative;
+  }
+
+  .hero-meta {
+    position: absolute;
+    top: 7.5rem;
+    left: 3rem;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink);
+    opacity: 0.55;
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .hero-meta span::before {
+    content: "—— ";
+    color: var(--gold);
+  }
+
+  .hero-left h1 {
+    font-family: var(--serif);
+    font-size: clamp(4rem, 9vw, 8.5rem);
+    font-weight: 400;
+    line-height: 0.92;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+  }
+
+  .hero-left h1 .first {
+    display: block;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--ink);
+    transform: translateX(0.4em);
+    animation: slideIn 1.2s ease-out;
+  }
+
+  .hero-left h1 .last {
+    display: block;
+    font-weight: 500;
+    animation: slideIn 1.2s ease-out 0.15s backwards;
+  }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-tag {
+    margin-top: 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    animation: fadeIn 1.5s ease-out 0.5s backwards;
+  }
+
+  .hero-tag .line {
+    width: 3rem;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .hero-right {
+    position: relative;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Hero illustration: balance scales */
+  .scales-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    aspect-ratio: 1;
+    animation: floatIn 2s ease-out 0.3s backwards;
+  }
+
+  @keyframes floatIn {
+    from { opacity: 0; transform: scale(0.92) rotate(-3deg); }
+    to { opacity: 1; transform: scale(1) rotate(0); }
+  }
+
+  .scales-svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .scales-svg .pivot {
+    transform-origin: 200px 130px;
+    animation: tilt 6s ease-in-out infinite;
+  }
+
+  @keyframes tilt {
+    0%, 100% { transform: rotate(-3deg); }
+    50% { transform: rotate(3deg); }
+  }
+
+  .hero-quote {
+    position: absolute;
+    bottom: 3rem;
+    right: 3rem;
+    max-width: 280px;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.1rem;
+    line-height: 1.4;
+    color: var(--ink);
+    opacity: 0.7;
+    text-align: right;
+  }
+
+  .hero-quote::before {
+    content: "“";
+    font-size: 4rem;
+    line-height: 0;
+    position: relative;
+    top: 1.2rem;
+    color: var(--gold);
+    margin-right: 0.2rem;
+  }
+
+  /* === MARQUEE === */
+  .marquee {
+    overflow: hidden;
+    border-top: 1px solid rgba(10, 10, 10, 0.15);
+    border-bottom: 1px solid rgba(10, 10, 10, 0.15);
+    background: var(--ink);
+    color: var(--paper);
+    padding: 1.4rem 0;
+    white-space: nowrap;
+  }
+
+  .marquee-track {
+    display: inline-block;
+    animation: scroll 40s linear infinite;
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    font-style: italic;
+    letter-spacing: 0.02em;
+  }
+
+  .marquee-track span {
+    margin: 0 2.5rem;
+  }
+
+  .marquee-track .dot {
+    color: var(--gold);
+    font-size: 0.8rem;
+    vertical-align: middle;
+  }
+
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* === SECTIONS === */
+  section {
+    padding: 7rem 3rem;
+    position: relative;
+  }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    margin-bottom: 1.5rem;
+    color: var(--rust);
+  }
+
+  .section-label::before {
+    content: "";
+    width: 2.5rem;
+    height: 1px;
+    background: var(--rust);
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 4rem;
+    max-width: 900px;
+  }
+
+  .section-title em {
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  /* === ABOUT === */
+  .about {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .about-portrait {
+    position: relative;
+    aspect-ratio: 3/4;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%);
+    overflow: hidden;
+    border-radius: 2px;
+  }
+
+  .about-portrait::before {
+    content: "MG";
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--serif);
+    font-size: 12rem;
+    font-weight: 300;
+    color: var(--gold);
+    opacity: 0.15;
+    letter-spacing: -0.05em;
+  }
+
+  .about-portrait::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 20px,
+        rgba(184, 146, 61, 0.04) 20px,
+        rgba(184, 146, 61, 0.04) 21px
+      );
+  }
+
+  .portrait-label {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    right: 1.5rem;
+    color: var(--paper);
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid rgba(244, 240, 232, 0.3);
+    padding-top: 1rem;
+  }
+
+  .portrait-label .gold-dot {
+    color: var(--gold);
+  }
+
+  .about-text p {
+    font-family: var(--serif);
+    font-size: 1.45rem;
+    line-height: 1.55;
+    margin-bottom: 1.5rem;
+    color: var(--ink);
+    font-weight: 400;
+  }
+
+  .about-text p:first-child::first-letter {
+    font-size: 4.5rem;
+    float: left;
+    line-height: 0.85;
+    padding: 0.3rem 0.6rem 0 0;
+    font-weight: 500;
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  .about-stats {
+    margin-top: 3rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(10, 10, 10, 0.15);
+  }
+
+  .stat-num {
+    font-family: var(--serif);
+    font-size: 3rem;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1;
+  }
+
+  .stat-num sup {
+    color: var(--gold);
+    font-size: 1rem;
+    margin-left: 0.2rem;
+  }
+
+  .stat-label {
+    margin-top: 0.5rem;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    opacity: 0.65;
+  }
+
+  /* === SERVICES === */
+  .services {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .services .section-label { color: var(--gold-soft); }
+  .services .section-label::before { background: var(--gold-soft); }
+  .services .section-title em { color: var(--gold-soft); }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    border-top: 1px solid rgba(244, 240, 232, 0.15);
+  }
+
+  .service {
+    padding: 3rem 2rem 3rem 0;
+    border-bottom: 1px solid rgba(244, 240, 232, 0.15);
+    display: grid;
+    grid-template-columns: 5rem 1fr;
+    gap: 2rem;
+    align-items: start;
+    cursor: pointer;
+    transition: padding 0.4s ease, background 0.4s ease;
+    position: relative;
+  }
+
+  .service:nth-child(odd) {
+    padding-right: 2rem;
+    border-right: 1px solid rgba(244, 240, 232, 0.15);
+    padding-left: 0;
+  }
+
+  .service:nth-child(even) {
+    padding-left: 2rem;
+  }
+
+  .service:hover {
+    background: rgba(184, 146, 61, 0.06);
+  }
+
+  .service-num {
+    font-family: var(--serif);
+    font-size: 2rem;
+    font-style: italic;
+    color: var(--gold-soft);
+    font-weight: 300;
+  }
+
+  .service h3 {
+    font-family: var(--serif);
+    font-size: 1.85rem;
+    font-weight: 500;
+    margin-bottom: 0.8rem;
+    line-height: 1.15;
+  }
+
+  .service p {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    opacity: 0.75;
+    max-width: 360px;
+  }
+
+  .service-arrow {
+    position: absolute;
+    top: 3rem;
+    right: 0;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    border: 1px solid rgba(244, 240, 232, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    font-size: 0.8rem;
+    opacity: 0.5;
+  }
+
+  .service:nth-child(even) .service-arrow {
+    right: 0;
+  }
+
+  .service:hover .service-arrow {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--ink);
+    opacity: 1;
+    transform: rotate(-45deg);
+  }
+
+  /* === PROCESS === */
+  .process-list {
+    list-style: none;
+    counter-reset: step;
+  }
+
+  .process-step {
+    display: grid;
+    grid-template-columns: 8rem 1fr 1fr;
+    gap: 3rem;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid rgba(10, 10, 10, 0.15);
+    align-items: baseline;
+    counter-increment: step;
+    position: relative;
+    transition: padding-left 0.5s ease;
+  }
+
+  .process-step:hover {
+    padding-left: 2rem;
+  }
+
+  .process-step::before {
+    content: counter(step, decimal-leading-zero);
+    font-family: var(--serif);
+    font-size: 4rem;
+    font-weight: 300;
+    color: var(--gold);
+    font-style: italic;
+    line-height: 1;
+  }
+
+  .process-step h4 {
+    font-family: var(--serif);
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 1.1;
+  }
+
+  .process-step p {
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: rgba(10, 10, 10, 0.75);
+  }
+
+  /* === CTA === */
+  .cta {
+    background:
+      linear-gradient(180deg, var(--cream) 0%, var(--paper) 100%);
+    padding: 8rem 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta::before {
+    content: "JUSTICIA";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--serif);
+    font-size: clamp(8rem, 22vw, 22rem);
+    font-weight: 300;
+    color: var(--gold);
+    opacity: 0.06;
+    letter-spacing: -0.03em;
+    pointer-events: none;
+    white-space: nowrap;
+    font-style: italic;
+  }
+
+  .cta-content {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .cta h2 {
+    font-family: var(--serif);
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 2rem;
+  }
+
+  .cta h2 em {
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  .cta-subtitle {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    font-style: italic;
+    color: rgba(10, 10, 10, 0.7);
+    margin-bottom: 3rem;
+    max-width: 540px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    padding: 1.1rem 2.5rem;
+    border-radius: 999px;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    text-decoration: none;
+    transition: all 0.4s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-primary {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .btn-primary:hover {
+    background: var(--gold);
+    color: var(--ink);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(184, 146, 61, 0.3);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--ink);
+  }
+
+  .btn-secondary:hover {
+    background: var(--ink);
+    color: var(--paper);
+    transform: translateY(-3px);
+  }
+
+  /* === FOOTER === */
+  footer {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 5rem 3rem 2rem;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 4rem;
+    padding-bottom: 4rem;
+    border-bottom: 1px solid rgba(244, 240, 232, 0.15);
+  }
+
+  .footer-brand h3 {
+    font-family: var(--serif);
+    font-size: 3rem;
+    font-weight: 400;
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+
+  .footer-brand h3 em {
+    font-weight: 300;
+    color: var(--gold);
+  }
+
+  .footer-brand p {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.1rem;
+    opacity: 0.7;
+    max-width: 360px;
+  }
+
+  .footer-col h5 {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--gold-soft);
+    margin-bottom: 1.5rem;
+  }
+
+  .footer-col p, .footer-col a {
+    display: block;
+    color: var(--paper);
+    text-decoration: none;
+    font-size: 0.95rem;
+    margin-bottom: 0.6rem;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+  }
+
+  .footer-col a:hover { opacity: 1; color: var(--gold-soft); }
+
+  .footer-bottom {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    opacity: 0.5;
+  }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 900px) {
+    nav { padding: 1.25rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero {
+      grid-template-columns: 1fr;
+      padding: 7rem 1.5rem 2rem;
+      gap: 2rem;
+    }
+    .hero-meta { left: 1.5rem; top: 5.5rem; }
+    .hero-right { height: 50vh; }
+    .hero-quote { position: static; max-width: none; text-align: left; margin-top: 2rem; }
+    section { padding: 4rem 1.5rem; }
+    .about { grid-template-columns: 1fr; gap: 3rem; }
+    .about-stats { grid-template-columns: 1fr; gap: 1.5rem; }
+    .services-grid { grid-template-columns: 1fr; }
+    .service:nth-child(odd) { border-right: none; padding-right: 0; }
+    .service:nth-child(even) { padding-left: 0; }
+    .process-step { grid-template-columns: 1fr; gap: 1rem; }
+    .process-step::before { font-size: 3rem; }
+    .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .cta { padding: 5rem 1.5rem; }
+    .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-mark">Michel <span class="ampersand">&</span> Asociados</div>
+  <ul class="nav-links">
+    <li><a href="#sobre">Sobre mí</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#proceso">Proceso</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <a href="tel:+573046710098" class="nav-phone">+57 304 671 0098</a>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-meta">
+    <span>Est. Medellín</span>
+    <span>Derecho Civil &amp; Penal</span>
+    <span>Col / 2026</span>
+  </div>
+
+  <div class="hero-left">
+    <h1>
+      <span class="first">Michel</span>
+      <span class="last">Gómez.</span>
+    </h1>
+    <div class="hero-tag">
+      <span class="line"></span>
+      <span>Abogado&nbsp;&nbsp;·&nbsp;&nbsp;Defensa de tus derechos</span>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="scales-wrap">
+      <svg class="scales-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+        <!-- decorative circle -->
+        <circle cx="200" cy="200" r="180" fill="none" stroke="#0a0a0a" stroke-width="0.5" stroke-dasharray="2 6" opacity="0.25"/>
+        <circle cx="200" cy="200" r="155" fill="none" stroke="#b8923d" stroke-width="0.5" opacity="0.4"/>
+
+        <!-- column base -->
+        <rect x="190" y="280" width="20" height="60" fill="#0a0a0a"/>
+        <rect x="170" y="335" width="60" height="8" fill="#0a0a0a"/>
+        <rect x="160" y="343" width="80" height="4" fill="#b8923d"/>
+
+        <!-- column top -->
+        <rect x="195" y="125" width="10" height="160" fill="#0a0a0a"/>
+        <circle cx="200" cy="125" r="6" fill="#b8923d"/>
+
+        <!-- pivot/scales arm group (animated) -->
+        <g class="pivot">
+          <line x1="80" y1="130" x2="320" y2="130" stroke="#0a0a0a" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- left chain -->
+          <line x1="100" y1="130" x2="100" y2="200" stroke="#0a0a0a" stroke-width="0.8"/>
+          <line x1="80" y1="130" x2="100" y2="200" stroke="#0a0a0a" stroke-width="0.8"/>
+          <line x1="120" y1="130" x2="100" y2="200" stroke="#0a0a0a" stroke-width="0.8"/>
+          <!-- left pan -->
+          <ellipse cx="100" cy="205" rx="50" ry="6" fill="#b8923d"/>
+          <path d="M 50 205 Q 100 235 150 205" fill="none" stroke="#0a0a0a" stroke-width="2"/>
+          <path d="M 55 205 Q 100 230 145 205" fill="#0a0a0a" opacity="0.85"/>
+
+          <!-- right chain -->
+          <line x1="300" y1="130" x2="300" y2="200" stroke="#0a0a0a" stroke-width="0.8"/>
+          <line x1="280" y1="130" x2="300" y2="200" stroke="#0a0a0a" stroke-width="0.8"/>
+          <line x1="320" y1="130" x2="300" y2="200" stroke="#0a0a0a" stroke-width="0.8"/>
+          <!-- right pan -->
+          <ellipse cx="300" cy="205" rx="50" ry="6" fill="#b8923d"/>
+          <path d="M 250 205 Q 300 235 350 205" fill="none" stroke="#0a0a0a" stroke-width="2"/>
+          <path d="M 255 205 Q 300 230 345 205" fill="#0a0a0a" opacity="0.85"/>
+        </g>
+
+        <!-- decorative stars -->
+        <g opacity="0.5">
+          <circle cx="60" cy="60" r="1.5" fill="#b8923d"/>
+          <circle cx="340" cy="80" r="1.5" fill="#b8923d"/>
+          <circle cx="350" cy="320" r="1.5" fill="#b8923d"/>
+          <circle cx="50" cy="340" r="1.5" fill="#b8923d"/>
+        </g>
+
+        <!-- latin word -->
+        <text x="200" y="380" text-anchor="middle" font-family="Cormorant Garamond, serif" font-style="italic" font-size="14" fill="#0a0a0a" opacity="0.6" letter-spacing="3">— iustitia omnibus —</text>
+      </svg>
+    </div>
+
+    <div class="hero-quote">
+      Donde otros ven complejidad, encontramos el camino al fallo justo.
+    </div>
+  </div>
+</header>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span>Derecho Civil</span><span class="dot">●</span>
+    <span>Derecho Penal</span><span class="dot">●</span>
+    <span>Derecho Laboral</span><span class="dot">●</span>
+    <span>Familia &amp; Sucesiones</span><span class="dot">●</span>
+    <span>Asesoría Empresarial</span><span class="dot">●</span>
+    <span>Litigio Estratégico</span><span class="dot">●</span>
+    <span>Derecho Civil</span><span class="dot">●</span>
+    <span>Derecho Penal</span><span class="dot">●</span>
+    <span>Derecho Laboral</span><span class="dot">●</span>
+    <span>Familia &amp; Sucesiones</span><span class="dot">●</span>
+    <span>Asesoría Empresarial</span><span class="dot">●</span>
+    <span>Litigio Estratégico</span><span class="dot">●</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="sobre">
+  <div class="section-label">01 — Conoce al abogado</div>
+  <h2 class="section-title">Estrategia jurídica con <em>criterio humano</em>, defensa con argumento sólido.</h2>
+
+  <div class="about">
+    <div class="about-portrait">
+      <div class="portrait-label">
+        <span>Michel Gómez</span>
+        <span class="gold-dot">● Abogado titular</span>
+      </div>
+    </div>
+
+    <div class="about-text">
+      <p>Cada caso comienza con una pregunta: ¿qué necesita realmente la persona que me consulta? La respuesta nunca está solo en el código. Está en escuchar, en entender el contexto, y en traducir lo legal en decisiones claras.</p>
+      <p>Mi trabajo combina rigor técnico con una comunicación directa. Sin tecnicismos vacíos. Sin promesas que no se sostengan. Solo una defensa pensada caso por caso.</p>
+
+      <div class="about-stats">
+        <div>
+          <div class="stat-num">+10<sup>★</sup></div>
+          <div class="stat-label">Años de ejercicio</div>
+        </div>
+        <div>
+          <div class="stat-num">200<sup>+</sup></div>
+          <div class="stat-label">Casos resueltos</div>
+        </div>
+        <div>
+          <div class="stat-num">98<sup>%</sup></div>
+          <div class="stat-label">Clientes satisfechos</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="servicios">
+  <div class="section-label">02 — Áreas de práctica</div>
+  <h2 class="section-title">Acompañamiento legal en los <em>momentos que importan</em>.</h2>
+
+  <div class="services-grid">
+    <div class="service">
+      <div class="service-num">i</div>
+      <div>
+        <h3>Derecho Civil</h3>
+        <p>Contratos, obligaciones, responsabilidad civil y protección patrimonial. Asesoría preventiva y representación en disputas.</p>
+      </div>
+      <div class="service-arrow">↗</div>
+    </div>
+
+    <div class="service">
+      <div class="service-num">ii</div>
+      <div>
+        <h3>Derecho Penal</h3>
+        <p>Defensa técnica en todas las etapas del proceso penal. Garantizamos el debido proceso y los derechos del investigado.</p>
+      </div>
+      <div class="service-arrow">↗</div>
+    </div>
+
+    <div class="service">
+      <div class="service-num">iii</div>
+      <div>
+        <h3>Derecho Laboral</h3>
+        <p>Despidos injustos, liquidaciones, acoso laboral y derechos del trabajador. También asesoría preventiva para empleadores.</p>
+      </div>
+      <div class="service-arrow">↗</div>
+    </div>
+
+    <div class="service">
+      <div class="service-num">iv</div>
+      <div>
+        <h3>Familia &amp; Sucesiones</h3>
+        <p>Divorcios, custodia, alimentos y procesos sucesorales. Manejados con discreción, sensibilidad y firmeza jurídica.</p>
+      </div>
+      <div class="service-arrow">↗</div>
+    </div>
+
+    <div class="service">
+      <div class="service-num">v</div>
+      <div>
+        <h3>Asesoría Empresarial</h3>
+        <p>Constitución de sociedades, contratos comerciales, cumplimiento normativo y resolución de conflictos societarios.</p>
+      </div>
+      <div class="service-arrow">↗</div>
+    </div>
+
+    <div class="service">
+      <div class="service-num">vi</div>
+      <div>
+        <h3>Tutelas &amp; Constitucional</h3>
+        <p>Acciones de tutela, derechos fundamentales y defensa frente al Estado. Justicia rápida cuando los derechos no esperan.</p>
+      </div>
+      <div class="service-arrow">↗</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="proceso">
+  <div class="section-label">03 — Cómo trabajamos</div>
+  <h2 class="section-title">Un proceso <em>claro</em> de principio a fin.</h2>
+
+  <ol class="process-list">
+    <li class="process-step">
+      <h4>Consulta inicial</h4>
+      <p>Conversamos sin compromiso. Escucho tu caso, identifico los puntos clave y te explico, en lenguaje claro, qué opciones tienes legalmente.</p>
+    </li>
+    <li class="process-step">
+      <h4>Estudio &amp; estrategia</h4>
+      <p>Reviso documentos, normativa aplicable y jurisprudencia. Diseño una estrategia adaptada a tu caso, con escenarios probables y plan de acción.</p>
+    </li>
+    <li class="process-step">
+      <h4>Representación</h4>
+      <p>Ejecuto la estrategia ante autoridades, jueces o contraparte. Tú recibes actualizaciones constantes, sin sorpresas ni jerga incomprensible.</p>
+    </li>
+    <li class="process-step">
+      <h4>Resolución &amp; acompañamiento</h4>
+      <p>Hasta el cumplimiento del fallo o el cierre del acuerdo. Y después también: te oriento para que el resultado se traduzca en tranquilidad real.</p>
+    </li>
+  </ol>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="contacto">
+  <div class="cta-content">
+    <div class="section-label" style="justify-content: center;">04 — Hablemos de tu caso</div>
+    <h2>Tu defensa empieza con una <em>conversación</em>.</h2>
+    <p class="cta-subtitle">Una llamada. Sin compromiso. Te explico tus opciones de manera clara y honesta antes de tomar cualquier decisión.</p>
+    <div class="cta-buttons">
+      <a href="tel:+573046710098" class="btn btn-primary">
+        Llamar ahora
+        <span>→</span>
+      </a>
+      <a href="https://wa.me/573046710098" target="_blank" rel="noopener" class="btn btn-secondary">
+        Escribir por WhatsApp
+        <span>→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <h3>Michel <em>Gómez</em></h3>
+      <p>Abogado. Acompañamiento legal con argumento, criterio y resultados verificables.</p>
+    </div>
+
+    <div class="footer-col">
+      <h5>Contacto</h5>
+      <a href="tel:+573046710098">+57 304 671 0098</a>
+      <a href="https://wa.me/573046710098" target="_blank" rel="noopener">WhatsApp directo</a>
+      <a href="mailto:contacto@michelgomez.co">contacto@michelgomez.co</a>
+    </div>
+
+    <div class="footer-col">
+      <h5>Atención</h5>
+      <p>Lunes — Viernes</p>
+      <p>8:00 a.m. — 6:00 p.m.</p>
+      <p style="opacity:0.55; margin-top:1rem;">Citas previas vía llamada o WhatsApp.</p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span>© 2026 Michel Gómez · Todos los derechos reservados</span>
+    <span>— iustitia omnibus —</span>
+  </div>
+</footer>
+
+</body>
+</html>
